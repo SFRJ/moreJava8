@@ -5,7 +5,7 @@ import utils.SomeFunctionalInterface;
 
 import java.util.function.*;
 
-public class Java8Part1 {
+public class LambdaBasics {
 
     //EXAMPLE 1
     public void simpleLambdaExample(){
@@ -86,11 +86,11 @@ public class Java8Part1 {
     }
 
     public static void main(String[] args) {
-        Java8Part1 java8Part1 = new Java8Part1();
-        java8Part1.simpleLambdaExample();
-        java8Part1.lambdaExampleWithParameters();
-        java8Part1.passingCodeAsData();
-        java8Part1.valuesPassedToLambdasMustBeFinal();
+        LambdaBasics lambdaBasics = new LambdaBasics();
+        lambdaBasics.simpleLambdaExample();
+        lambdaBasics.lambdaExampleWithParameters();
+        lambdaBasics.passingCodeAsData();
+        lambdaBasics.valuesPassedToLambdasMustBeFinal();
     }
 
     /*
