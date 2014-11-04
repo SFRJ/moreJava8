@@ -1,9 +1,6 @@
 package part2;
 
-import utils.Artist;
-import utils.Instrument;
-import utils.Person;
-import utils.SuperHero;
+import utils.*;
 
 import java.util.*;
 import java.util.function.BinaryOperator;
@@ -130,4 +127,35 @@ public class StreamsBasics {
             return gangster;
         });
     }
+
+    /*
+        We can iterate each of the elements of an stream using forEach()
+    */
+   public List<String> iteratingEachOfElementNamesWithForEach(List<Album> albums) {
+       //Method references can be used when the lambda just needs to reference a method.
+       //This: album -> album.getTracks() is equal to Album::getTracks
+       List<String> output = new ArrayList<>();
+       albums.stream().forEach(album -> album.getSongs().
+               filter(song -> song.lengthInSeconds() > 60).
+               map(Song::name).forEach(output::add));
+       return output;
+   }
+
+    /*
+        The previous example can be translated to a more idiomatic style using a flat map
+    */
+    public Set<String> iteratingEachOfElementNamesWithFlatMap(List<Album> albums) {
+        return albums.stream()
+                .flatMap(Album::getSongs)
+                .filter(song -> song.lengthInSeconds() > 60)
+                .map(Song::getName)
+                .collect(toSet());
+        //Note: To avoid misusing the stream, it is recommended not to assign to local variables intermediate results, open the least streams as possible
+    }
+
+    /*
+        We call higher order functions to the functions that either take a function as an argument or return one(Functional interfaces).
+        Higher order functions will allow to focus on the "what" and ont the "how"
+    */
+
 }
