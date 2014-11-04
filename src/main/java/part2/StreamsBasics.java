@@ -6,6 +6,7 @@ import java.util.*;
 import java.util.function.BinaryOperator;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -157,5 +158,15 @@ public class StreamsBasics {
         We call higher order functions to the functions that either take a function as an argument or return one(Functional interfaces).
         Higher order functions will allow to focus on the "what" and ont the "how"
     */
+    public Predicate<String> returningAHigherOrderFunction() {
+        return value -> value.length() > 10;
+    }
+
+    public void takingAHigherOrderFunctionAsParameter(Predicate<String> validator) {
+        List<String> words = new ArrayList<>();
+        words.add("plane");
+        words.add("apple");
+        words.stream().filter(validator);
+    }
 
 }
