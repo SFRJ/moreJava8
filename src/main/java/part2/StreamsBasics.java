@@ -183,4 +183,25 @@ public class StreamsBasics {
         //Internal iteration example
         artists.stream().flatMap(Artist::getMembers).count();
     }
+
+    /*
+        Eager
+        This is an eager method signature, because it returns a type that cannot longer be chained
+        boolean anyMatch(Predicate<? super T> predicate)
+        Lazy
+        This is a lazy method signature because it returns a type that can be chained further
+        Stream<T> limit(long maxSize);
+    */
+
+    /*
+        WHAT ARE PURE FUNCTIONS
+        Functional programming is most useful when programs are written in terms of functions that always return the same
+        output for a given input (regardless of any other state present in the running program) and that do not cause  any other
+        effects or change any program state. Functions that obey this are sometimes called "pure" functions, and they behave in the
+        same way that mathematical functions do.
+
+        The great advantage that pure functions have is that they are much easier to reason about because their operation does not depend
+        on external state. Functions can easily be combined together - and this can be seen in developer workflow styles such as the
+        REPL (Read, Execute, Print, Loop) style common to Lisp dialects and other languages with strong functional heritage.
+    */
 }
