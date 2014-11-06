@@ -5,9 +5,13 @@ public class Instrument {
     private String instrumentType;
     private String colour;
 
-    public Instrument(String instrumentType, String colour) {
+    private Instrument(String instrumentType, String colour) {
         this.instrumentType = instrumentType;
         this.colour = colour;
+    }
+
+    public static Instrument instrument(String instrumentType, String colour) {
+        return new Instrument(instrumentType, colour);
     }
 
     public String getInstrumentType() {

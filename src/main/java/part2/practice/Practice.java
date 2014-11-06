@@ -24,8 +24,16 @@ public class Practice {
 
     //A function that takes in artists and returns a list of artists with at most three instruments
     public List<Artist> albumsWithNoMoreThan3Songs(List<Artist> artists) {
-        //TODO continue here
-        return null;
+        return artists.stream().filter((artist) -> artist.getInstruments().size() <=3).collect(toList());
+    }
+
+    //Convert this code sample from using external iteration to internal iteration
+    public void internalIteration(List<Artist> artists) {
+        int totalMembers = 0;
+        for (Artist artist : artists) {
+            Stream<Artist> members = artist.getMembers();
+            totalMembers += members.count();
+        }
     }
 
     public static void main(String[] args) {
@@ -42,4 +50,6 @@ public class Practice {
         }})
         );
     }
+
+
 }

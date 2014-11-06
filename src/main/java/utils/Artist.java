@@ -1,6 +1,7 @@
 package utils;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 public class Artist {
 
@@ -8,6 +9,7 @@ public class Artist {
     private String name;
     private String origin;
     private boolean isFrom;
+    private Stream<Artist> members;
 
     public Artist() {
     }
@@ -15,6 +17,12 @@ public class Artist {
     public Artist(String name, String origin) {
         this.name = name;
         this.origin = origin;
+    }
+
+    public Artist(String name, String origin, List<Instrument> instruments) {
+        this.name = name;
+        this.origin = origin;
+        this.instruments = instruments;
     }
 
     public String getName(){return name;}
@@ -39,5 +47,9 @@ public class Artist {
 
     public void setOrigin(String origin) {
         this.origin = origin;
+    }
+
+    public Stream<Artist> getMembers() {
+        return members;
     }
 }

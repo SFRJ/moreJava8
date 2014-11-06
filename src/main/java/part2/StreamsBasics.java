@@ -155,17 +155,32 @@ public class StreamsBasics {
 
     /*
         We call higher order functions to the functions that either take a function as an argument or return one(Functional interfaces).
-        Higher order functions will allow to focus on the "what" and ont the "how"
+        Higher order functions will allow to focus on the "what" and ont the "how".
     */
     public Predicate<String> returningAHigherOrderFunction() {
         return value -> value.length() > 10;
     }
 
     public void takingAHigherOrderFunctionAsParameter(Predicate<String> validator) {
-        List<String> words = new ArrayList<>();
+        List<String> words = new ArrayList<String>();
         words.add("plane");
         words.add("apple");
         words.stream().filter(validator);
     }
 
+    /*
+        We call external iteration to the way of iterating where the looping boilerplate call is visible.
+        We call internal iteration to the way of iterating where the looping boilerplate code is hidden by using a function.
+    */
+    public void internalIteration(List<Artist> artists) {
+        //External iteration example
+        int totalMembers = 0;
+        for (Artist artist : artists) {
+            Stream<Artist> members = artist.getMembers();
+            totalMembers += members.count();
+        }
+
+        //Internal iteration example
+        artists.stream().flatMap(Artist::getMembers).count();
+    }
 }
