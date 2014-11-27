@@ -40,6 +40,9 @@ public class CollectionsAdvancedTopics {
         //each of the elements
         List<Integer> someOrders = new ArrayList<>(asList(1,2,3,4));
         System.out.println(someOrders.stream().map((x) -> x + 9).collect(toList()));
+
+        //NOTE: reduce(), filter(), map()... and other functions work more efficiently on ordered streams.
+        //WARN: forEach() function if they doesn't have ordered inputs, the output can be unpredictable.
     }
 
     public static void main(String[] args) {
