@@ -2,10 +2,9 @@ package part4;
 
 import utils.Artist;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
@@ -43,6 +42,14 @@ public class CollectionsAdvancedTopics {
 
         //NOTE: reduce(), filter(), map()... and other functions work more efficiently on ordered streams.
         //WARN: forEach() function if they doesn't have ordered inputs, the output can be unpredictable.
+    }
+
+    public void differentTypesOfCollectors(List<Artist> artists) {
+        //Using collectors that use comparators
+        Function<Artist,Long> numberOfMembers = artist -> artist.getMembers().count();
+        artists.stream().collect(Collectors.maxBy(Comparator.comparing(numberOfMembers)));
+        //Finding an average with collectors(Average number of instruments per artist)
+        artists.stream().collect(Collectors.averagingInt(artist -> artist.getInstruments().size()));
     }
 
     public static void main(String[] args) {
