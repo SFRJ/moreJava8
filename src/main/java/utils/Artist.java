@@ -10,6 +10,7 @@ public class Artist {
     private String origin;
     private boolean isFrom;
     private Stream<Artist> members;
+    private boolean isSolo;
 
     public Artist() {
     }
@@ -51,5 +52,13 @@ public class Artist {
 
     public Stream<Artist> getMembers() {
         return members;
+    }
+
+    public boolean isSolo() {
+        return isSolo;
+    }
+
+    public void setSolo(boolean isSolo) {
+        this.isSolo = isSolo;
     }
 }

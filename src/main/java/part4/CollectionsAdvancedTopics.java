@@ -44,12 +44,18 @@ public class CollectionsAdvancedTopics {
         //WARN: forEach() function if they doesn't have ordered inputs, the output can be unpredictable.
     }
 
-    public void differentTypesOfCollectors(List<Artist> artists) {
+    public void differentTypesOfOutOfTheBoxCollectorsForDifferentPurposes(List<Artist> artists) {
         //Using collectors that use comparators
         Function<Artist,Long> numberOfMembers = artist -> artist.getMembers().count();
         artists.stream().collect(Collectors.maxBy(Comparator.comparing(numberOfMembers)));
+
         //Finding an average with collectors(Average number of instruments per artist)
         artists.stream().collect(Collectors.averagingInt(artist -> artist.getInstruments().size()));
+
+        //Partitioning data based on true and false(putting in separate lists those artists who often play solo)
+        Map<Boolean,List<Artist>> bands = artists.stream().collect(Collectors.partitioningBy(Artist::isSolo));
+
+
     }
 
     public static void main(String[] args) {
