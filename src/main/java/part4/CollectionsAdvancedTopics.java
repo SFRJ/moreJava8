@@ -1,12 +1,15 @@
 package part4;
 
+import utils.Album;
 import utils.Artist;
+import utils.Instrument;
 
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static java.util.Arrays.asList;
+import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toList;
 
 public class CollectionsAdvancedTopics {
@@ -44,7 +47,7 @@ public class CollectionsAdvancedTopics {
         //WARN: forEach() function if they doesn't have ordered inputs, the output can be unpredictable.
     }
 
-    public void differentTypesOfOutOfTheBoxCollectorsForDifferentPurposes(List<Artist> artists) {
+    public void differentTypesOfOutOfTheBoxCollectorsForDifferentPurposes(List<Artist> artists, List<Album> albums) {
         //Using collectors that use comparators
         Function<Artist,Long> numberOfMembers = artist -> artist.getMembers().count();
         artists.stream().collect(Collectors.maxBy(Comparator.comparing(numberOfMembers)));
@@ -55,7 +58,20 @@ public class CollectionsAdvancedTopics {
         //Partitioning data based on true and false(putting in separate lists those artists who often play solo)
         Map<Boolean,List<Artist>> bands = artists.stream().collect(Collectors.partitioningBy(Artist::isSolo));
 
+        //Grouping data based on an object of their internal state(e.g Groups of Albums by Main Artist)
+        Map<Artist, List<Album>> albumsGroupedByMainArtist =
+            albums.stream().collect(groupingBy(Album::getMainArtist));
 
+        //Grouping advanced - finding metadata about the groups(e.g How many albums each Artist has)
+        Map<Artist, Long> numberOfAlbumsEachArtist =
+                albums.stream().collect(groupingBy(Album::getMainArtist,Collectors.counting()));
+
+        //Grouping advanced - finding metadata about the groups(e.g Name of albums that each artist has produced)
+        Map<Artist, List<String>> namesOfAlbumsEachArtistHasProduced =
+                albums.stream().collect(groupingBy(Album::getMainArtist, Collectors.mapping(Album::getName,toList())));
+
+        //Building Strings using collectors
+        String result = artists.stream().map(Artist::getName).collect(Collectors.joining(",", "[", "]"));
     }
 
     public static void main(String[] args) {
